@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants & Items</title>
+</head>
+<body>
+    <h1>All Restaurants</h1>
+    <ul id="restaurant-list"></ul>
+
+    <h1>All Items</h1>
+    <ul id="item-list"></ul>
+
+    <script>
+        // Fetch Restaurants
+        fetch("http://localhost:3000/api/restaurants")
+            .then(response => response.json())
+            .then(data => {
+                const restaurantList = document.getElementById("restaurant-list");
+                data.forEach(restaurant => {
+                    const li = document.createElement("li");
+                    li.textContent = restaurant.name + " - " + restaurant.location;
+                    restaurantList.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Error fetching restaurants:", error));
+
+        // Fetch Items
+        fetch("http://localhost:3000/api/items")
+            .then(response => response.json())
+            .then(data => {
+                const itemList = document.getElementById("item-list");
+                data.forEach(item => {
+                    const li = document.createElement("li");
+                    li.textContent = `${item.name} - $${item.price}`;
+                    itemList.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Error fetching items:", error));
+    </script>
+</body>
+</html>
