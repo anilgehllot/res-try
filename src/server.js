@@ -13,6 +13,10 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("✅ Connected to MongoDB"))
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
+
+app.get('/' , (req , res) => {
+    res.send("hello word");
+})
 app.use("/api/restaurants", require("./routes/restaurant.routes"));
 app.use("/api/items", require("./routes/item.routes"));
 
